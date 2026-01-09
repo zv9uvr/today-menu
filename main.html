@@ -4,366 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>저녁 메뉴 추천</title>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=services"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f9f9f9;
-            position: relative;
-        }
-
-        .header-text {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 0.9em;
-            color: #555555;
-            font-weight: bold;
-        }
-
-        .footer-text {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 0.8em;
-            color: #555555;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .button {
-            padding: 10px 20px;
-            background: #F15F5F;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1em;
-            box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3), 0px 6px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .button:hover {
-            background: #e05252;
-        }
-
-        .button:active {
-            transform: scale(0.95);
-            box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.4), 0px 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-       .input-group input {
-    padding: 10px;
-    width: 300px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 10px 0 0 10px;
-    box-sizing: border-box;
-    height: 40px; /* 높이 추가 */
-}
-
-.location-button {
-    padding: 0;
-    width: 40px; /* 버튼의 너비를 높이에 맞추어 설정 */
-    height: 40px; /* 높이를 입력창과 동일하게 설정 */
-    background: #F15F5F;
-    color: white;
-    border: none;
-    border-radius: 0 10px 10px 0;
-    cursor: pointer;
-    font-size: 1em;
-    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3), 0px 6px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
-
-
-        .location-button:before {
-            content: '🔍';
-            font-size: 1.2em;
-        }
-
-        .location-button:hover {
-            background: #e05252;
-        }
-
-        .location-button:active {
-            transform: scale(0.95);
-            box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.4), 0px 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .map-container {
-            display: flex;
-            gap: 20px;
-        }
-
-        #map {
-            width: 600px;
-            height: 400px;
-        }
-
-        .restaurant-list {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 200px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .restaurant-item {
-            padding: 10px;
-            background-color: #FFD8D8;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: height 0.3s;
-            overflow: hidden;
-        }
-
-        .refresh-button {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            padding: 5px 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2em;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .refresh-button:hover {
-            background-color: #45A049;
-        }
-
-        .refresh-button:active {
-            background-color: #388E3C;
-        }
-
-        .warning-message {
-            font-size: 0.8em;
-            margin-bottom: 10px;
-            display: none;
-            color: black;
-        }
-
-        .reset-link {
-            color: red;
-            text-decoration: underline;
-            cursor: pointer;
-            font-weight: bold;
-        }
-    </style>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=services"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header-text">가천대학교 AI 중심세상 팀 프로젝트 결과물 (김나연, 김현아, 송시은, 최윤희)</div>
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <clipPath id="squircleClip" clipPathUnits="objectBoundingBox">
+                <path d="M 0,0.5 C 0,0 0,0 0.5,0 S 1,0 1,0.5 1,1 0.5,1 0,1 0,0.5"></path>
+            </clipPath>
+        </defs>
+    </svg>
 
-    <h1>저녁 메뉴 추천</h1>
+    <div class="custom-dock">
+        <a href="https://github.com/zv9uvr" target="_blank" class="dock-item github">
+            <div class="icon-box">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </div>
+        </a>
+/sdk.js?a
+        <a href="https://linkedin.com/in/n4yeon-kim" target="_blank" class="dock-item linkedin">
+            <div class="icon-box">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+        </a>
+    </div>
+
+    <h1>Today's Menu</h1>
+
+    <div class="header-text" id="static-wave">● Developed by 김나연 (Gachon Univ. AI Project) ●</div>
 
     <div class="button-group">
-        <button class="button" onclick="searchPlaces('한식')">한식</button>
-        <button class="button" onclick="searchPlaces('중식')">중식</button>
-        <button class="button" onclick="searchPlaces('양식')">양식</button>
-        <button class="button" onclick="searchPlaces('일식')">일식</button>
+        <button class="neobtn" onclick="searchPlaces('한식')">
+            <span class="button_top">한식</span>
+        </button>
+
+        <button class="neobtn" onclick="searchPlaces('중식')">
+            <span class="button_top">중식</span>
+        </button>
+
+        <button class="neobtn" onclick="searchPlaces('양식')">
+            <span class="button_top">양식</span>
+        </button>
+
+        <button class="neobtn" onclick="searchPlaces('일식')">
+            <span class="button_top">일식</span>
+        </button>
     </div>
 
     <div class="input-group">
-        <input type="text" id="location-input" placeholder="지역을 입력해주세요!">
-        <button class="location-button" onclick="setLocation()"></button>
+        <div class="search-box">
+            <input type="text" id="location-input" placeholder="어디 근처에서 찾을까요?">
+            <button class="search-btn" onclick="setLocation()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </button>
+        </div>
+    
+        <button class="neobtn" onclick="getCurrentLocation()" style="--button_color: #FFF9F0;">
+            <span class="button_top">내 위치</span>
+        </button>
     </div>
 
     <div class="map-container">
-        <div id="map"></div>
+        <div class="map-wrapper">
+            <div id="category-title" class="category-label"> < CATEGORY > </div>
+            <div id="map"></div>
+        </div>
+
         <div class="restaurant-list" id="restaurant-list">
-            <div class="warning-message" id="warning-message">
-                더 이상 새로운 음식점이 없습니다. <span class="reset-link" onclick="resetRestaurants()">초기화</span> 하시겠습니까?
-            </div>
-            <button class="refresh-button" onclick="displayRandomPlaces()">⟳</button>
+            <button class="refresh-button" onclick="displayRandomPlaces()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"></path>
+                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"></path>
+                </svg>
+                REFRESH
+            </button>
+
+        <div class="warning-message" id="warning-message" style="display: none;">
+            <p>더 이상 식당이 없어요!</p>
+            <button class="neobtn" onclick="resetRestaurants()" style="--button_color: #FFF59D; margin-top: 10px;">
+                <span class="button_top">RESET</span>
+            </button>
         </div>
     </div>
 
-    <div class="footer-text">해당 홈페이지는 ChatGPT, kakao developer를 활용해 만들었습니다.</div>
-
-    <script>
-        var mapContainer = document.getElementById('map'),
-            mapOption = {
-                center: new kakao.maps.LatLng(37.5665, 126.9780), // 기본 위치
-                level: 5 
-            };
-
-        var map = new kakao.maps.Map(mapContainer, mapOption);
-        var ps = new kakao.maps.services.Places(); 
-        var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-        var selectedCategory = '';
-        var centerPosition;
-        var markers = [];
-        var allPlaces = []; // 현재 남은 음식점 목록
-        var initialPlaces = []; // 초기 검색된 전체 음식점 목록
-
-        function setLocation() {
-            var location = document.getElementById('location-input').value;
-            
-            if (!location) {
-                alert('지역을 입력해 주세요.');
-                return;
-            }
-            
-            ps.keywordSearch(location, function(data, status) {
-                if (status === kakao.maps.services.Status.OK) {
-                    centerPosition = new kakao.maps.LatLng(data[0].y, data[0].x);
-                    map.setCenter(centerPosition);
-                } else {
-                    alert('입력한 지역을 찾을 수 없습니다.');
-                }
-            });
-        }
-
-        function searchPlaces(category) {
-            selectedCategory = category;
-            if (!centerPosition) {
-                alert('먼저 지역을 설정해 주세요.');
-                return;
-            }
-
-            clearMarkers();
-            allPlaces = [];
-            initialPlaces = [];
-            hideWarningMessage();
-
-            var options = {
-                location: centerPosition, 
-                radius: 1000
-            };
-
-            ps.keywordSearch(category, function(data, status) {
-                if (status === kakao.maps.services.Status.OK) {
-                    allPlaces = data.slice();
-                    initialPlaces = data.slice(); // 초기 전체 목록 저장
-                    displayPlaces(data);
-                    displayRandomPlaces(); 
-                } else {
-                    alert('검색 결과가 없습니다.');
-                }
-            }, options);
-        }
-
-        function displayPlaces(places) {
-            for (var i = 0; i < places.length; i++) {
-                var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x);
-                
-                var marker = new kakao.maps.Marker({
-                    map: map,
-                    position: placePosition
-                });
-                markers.push(marker);
-
-                (function(marker, place) {
-                    kakao.maps.event.addListener(marker, 'click', function() {
-                        infowindow.setContent('<div>' + place.place_name + '</div>');
-                        infowindow.open(map, marker);
-                    });
-                })(marker, places[i]);
-            }
-        }
-
-        function displayRandomPlaces() {
-            var listEl = document.getElementById('restaurant-list');
-            listEl.querySelectorAll('.restaurant-item').forEach(item => item.remove());
-
-            if (allPlaces.length === 0) {
-                showWarningMessage();
-                return;
-            }
-
-            var randomPlaces = shuffleArray(allPlaces).slice(0, 3);
-            allPlaces = allPlaces.filter(place => !randomPlaces.includes(place));
-
-            for (var i = 0; i < randomPlaces.length; i++) {
-                var place = randomPlaces[i];
-                var itemEl = document.createElement('div');
-                itemEl.className = 'restaurant-item';
-                itemEl.innerText = place.place_name;
-                listEl.appendChild(itemEl);
-
-                (function(place) {
-                    itemEl.addEventListener('click', function() {
-                        var position = new kakao.maps.LatLng(place.y, place.x);
-                        map.panTo(position);
-                        infowindow.setContent('<div>' + place.place_name + '</div>');
-                        infowindow.open(map, new kakao.maps.Marker({
-                            map: map,
-                            position: position
-                        }));
-                    });
-                })(place);
-            }
-        }
-
-        function resetRestaurants() {
-            document.getElementById('restaurant-list').querySelectorAll('.restaurant-item').forEach(item => item.remove());
-            infowindow.close();
-            hideWarningMessage();
-
-            allPlaces = initialPlaces.slice(); // 초기 목록으로 복원
-            displayRandomPlaces();
-        }
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        function clearMarkers() {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(null);
-            }
-            markers = [];
-        }
-
-        function showWarningMessage() {
-            document.getElementById('warning-message').style.display = 'block';
-        }
-
-        function hideWarningMessage() {
-            document.getElementById('warning-message').style.display = 'none';
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
