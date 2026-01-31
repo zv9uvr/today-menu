@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Do+Hyeon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Do+Hyeon&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+
+/* 1. 모든 요소에 폰트 강제 적용 (가장 확실한 방법) */
+* {
+    font-family: 'Do Hyeon', sans-serif !important;
+}
+
+/* 2. 로그아웃 컨테이너 및 카드 설정 */
+.logout-container {
+    background-color: #FFF9F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.logout-card {
+    background: #ffffff;
+    border: 3px solid #000;
+    border-radius: 25px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 12px 12px 0px rgba(0,0,0,0.1);
+    max-width: 420px;
+    width: 90%;
+}
+
+/* 3. 제목 및 문구 스타일 세부 조정 */
+.logout-card h1 {
+    font-size: 2.2rem !important;
+    margin-bottom: 20px !important;
+    color: #000 !important;
+    word-break: keep-all; /* 한글 줄바꿈 예쁘게 */
+}
+
+.logout-card p {
+    font-size: 1.2rem !important;
+    color: #555 !important;
+    margin-bottom: 40px !important;
+    line-height: 1.6 !important;
+}
+
+/* 4. 버튼 그룹 */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

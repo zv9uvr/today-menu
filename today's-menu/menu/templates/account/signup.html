@@ -1,0 +1,27 @@
+{% extends "menu/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'menu/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-emoji">📝</div>
+        <div class="auth-msg">
+            <h1>함께 시작해요!</h1>
+            <p>간단한 정보만 입력하면<br>나만의 맛집 리스트를 만들 수 있어요.</p>
+        </div>
+
+        <form method="post" action="{% url 'account_signup' %}" class="auth-form-fields">
+            {% csrf_token %}
+            {{ form.as_p }} <div class="auth-btn-group">
+                <button type="submit" class="neobtn">
+                    <span class="button_top" style="--button_color: #FFF59D;">가입 완료</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,654 @@
+/* 폰트 불러오기: Alfa Slab One(제목용) + Do Hyeon(기본용) */
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Do+Hyeon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Do+Hyeon&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+
+/* 1. 상단 독(Dock) 메뉴 */
+.custom-dock {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+}
+.dock-item { text-decoration: none; transition: all 0.3s ease-out; }
+.icon-box {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    clip-path: url(#squircleClip); 
+    transition: all 0.3s;
+}
+.icon-box svg { width: 28px; height: 28px; color: white; }
+.github .icon-box { background: linear-gradient(135deg, #4b5563, #111827); }
+.linkedin .icon-box { background: linear-gradient(135deg, #2563eb, #1e40af); }
+.dock-item:hover { transform: scale(1.1) translateY(-5px); }
+
+/* 2. 전체 레이아웃 */
+body {
+    background-color: #FFF9F0;
+    font-family: 'Do Hyeon', sans-serif;
+    color: #4A4A4A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 5px 0;
+}
+
+/* 제목 영역 전체 레이아웃 */
+.title-wrapper {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center;
+    gap: 30px; /* 제목과 양옆 문구 사이 간격 */
+    margin-top: 30px;
+    
+}
+
+/* 제목 영역 컨테이너 */
+.main-title-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 50px;
+    margin-bottom: 115px; /* 아래 요소들과의 간격 확보 */
+}
+
+/* 양옆 작은 문구 스타일 */
+.side-text {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: rem; /* 작고 귀엽게 */
+    line-height: 1.5;
+    color: #000;
+    font-weight: 900;
+    /* 제목 높이에 맞춰 살짝 아래로 내리고 싶을 때 사용 */
+    white-space: nowrap;
+    margin: 0 !important;
+}
+
+.side-text.left { text-align: right; }
+.side-text.right { text-align: left; }
+
+h1 {
+    font-family: "Alfa Slab One", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 7em; 
+    color: #000000;
+    margin-bottom: 5px;
+    text-align: center;
+    letter-spacing: -2px; 
+}
+
+.header-text {
+    font-family: 'Do Hyeon', sans-serif; /* 폰트 일관성 유지 */
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 30px;
+    display: block;
+    text-align: center;
+}
+
+.header-text span {
+    display: inline-block;
+    white-space: pre;
+}
+
+.side-text {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #000;
+    font-weight: 900;
+    white-space: nowrap;
+    
+    /* [수정] 양옆 문구가 똑같은 공간을 차지하도록 설정 */
+    flex: 1; 
+}
+
+.side-text.left { 
+    text-align: right; 
+    padding-right: 25px; /* 타원과의 간격 */
+}
+
+.side-text.right { 
+    text-align: left; 
+    padding-left: 25px; /* 타원과의 간격 */
+}
+
+/* 4. 카테고리 버튼 그룹 */
+.button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: -20px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.neobtn {
+    --button_radius: 0.5em;
+    --button_color: #FFF9F0;
+    --button_outline_color: #000000;
+    font-family: 'Do Hyeon', sans-serif; /* Gaegu에서 변경 */
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--button_radius);
+    background: var(--button_outline_color);
+    padding: 0;
+    display: inline-block;
+}
+
+.button_top {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid var(--button_outline_color);
+    border-radius: var(--button_radius);
+    padding: 10px 20px;
+    background: var(--button_color);
+    color: var(--button_outline_color);
+    transform: translateY(-0.2em);
+    transition: transform 0.1s ease;
+}
+
+.neobtn:hover .button_top { transform: translateY(-0.33em); }
+.neobtn:active .button_top { transform: translateY(0); }
+
+/* 5. 입력창 영역 */
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 80%;
+    max-width: 800px;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+#location-input {
+    width: 100%;
+    padding: 8px 50px 8px 20px; 
+    font-family: 'Do Hyeon', sans-serif; /* Gaegu에서 변경 */
+    font-size: 1.3em;
+    border: 1.5px solid #000; 
+    border-radius: 12px;
+    background-color: #FFF9F0; 
+    outline: none;
+}
+
+.search-btn {
+    position: absolute;
+    right: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.search-btn svg {
+    width: 22px;
+    height: 22px;
+    stroke: #000;
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+}
+
+.location-neobtn {
+    --button_radius: 0.5em;
+    --button_color: #ff4444; 
+    --button_outline_color: #000000;
+    font-family: 'Do Hyeon', sans-serif; 
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    background: var(--button_outline_color);
+    padding: 0;
+    display: inline-block;
+}
+
+.location-button {
+    width: 50px;
+    height: 50px;
+    background-color: #000;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+/* 6. 지도 및 리스트 박스 레이아웃 */
+.map-container {
+    display: flex;
+    gap: 0; 
+    margin-top: 20px;
+    align-items: flex-start; 
+    justify-content: center;
+}
+
+.map-wrapper {
+    position: relative;
+    padding: 10px;
+    display: flex;
+}
+
+#map {
+    width: 600px !important; 
+    height: 450px !important;
+    border: 1.8px solid #000; 
+    box-shadow: 
+        0 0 0 3px #FFF9F0, 
+        0 0 0 5.5px #000,
+        10px 10px 0px rgba(0,0,0,0.1);
+    margin: 15px; 
+    background-color: #eee;
+    position: relative;
+    z-index: 1;
+}
+
+.category-label {
+    position: absolute;
+    top: 8px;            
+    left: 50%;
+    transform: translateX(-50%);
+    color: #000000;      
+    font-family: 'Do Hyeon', sans-serif; /* Gaegu에서 변경 */
+    font-size: 1.5em;     
+    font-weight: bold;
+    text-align: center;
+    z-index: 100;
+    text-shadow: 
+        -2.5px -2.5px 0 #FFF9F0,  
+         2.5px -2.5px 0 #FFF9F0,
+        -2.5px  2.5px 0 #FFF9F0,
+         2.5px  2.5px 0 #FFF9F0,
+         0px   -3px   0 #FFF9F0,
+         0px    3px   0 #FFF9F0,
+        -3px    0px   0 #FFF9F0,
+         3px    0px   0 #FFF9F0;
+}
+
+.restaurant-list {
+    padding: 20px;
+    width: 280px;
+    box-sizing: border-box; 
+    height: 447px; /* 미세 조정된 높이 유지 */
+    margin: 25px 15px 15px 15px; 
+    border: 1.8px solid #000; 
+    box-shadow: 
+        0 0 0 3px #FFF9F0, 
+        0 0 0 5.5px #000,
+        10px 10px 0px rgba(0,0,0,0.1);
+    background-color: #FFF9F0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+@keyframes spin_357 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.refresh-button {
+    color: white;
+    background-color: #222;
+    /* 폰트 변경 및 설정 */
+    font-family: "Merriweather", serif;
+    font-weight: 700;
+    font-optical-sizing: auto;
+    
+    border-radius: 0.5rem;
+    font-size: 1rem; /* 폰트 크기 살짝 조정 */
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+    transition: all 0.2s;
+    margin-bottom: 15px; 
+    width: 100%;
+    justify-content: center;
+    outline: none; /* 포커스 시 테두리 제거 */
+}
+
+/* 거대해진 아이콘 크기 강제 고정 */
+.refresh-button svg {
+    width: 18px !important; 
+    height: 18px !important;
+    margin-right: 10px;
+    fill: currentColor;
+    flex-shrink: 0; /* 폰트 때문에 찌그러지지 않게 방지 */
+}
+
+
+/* --- WARNING 메시지 및 RESET 버튼 전용 설정 --- */
+
+.warning-message {
+    text-align: center;
+    padding: 20px 10px;
+    /* 1. 메시지 텍스트 폰트 변경 */
+    font-family: "Merriweather", serif !important;
+    font-weight: 700;
+    font-size: 0.95em;
+    
+    color: #555;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+/* 2. WARNING 메시지 안의 RESET 버튼 폰트 강제 적용 */
+.warning-message .neobtn {
+    font-family: "Merriweather", serif !important;
+}
+
+.warning-message .button_top {
+    font-family: "Merriweather", serif !important;
+    font-weight: 900; /* 버튼은 조금 더 두껍게 */
+    padding: 0.6em 1.5em;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+}
+
+/* 3. RESET 버튼의 아이콘(있는 경우) 크기 조정 */
+.warning-message svg {
+    width: 16px !important;
+    height: 16px !important;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.custom-infowindow {
+    padding: 10px;
+    border: 2px solid #000;
+    background: #FFF9F0;
+    font-family: 'Do Hyeon', sans-serif; /* Gaegu에서 변경 */
+    min-width: 180px;
+}
+
+/* [최종 수정] 타원과 텍스트 세트를 제목 정중앙에 완벽 배치 */
+.header-container {
+    position: absolute;
+    top: 95%;             /* 제목 하단에 배치 */
+    left: 50%;            /* 화면 가로 50% 지점 */
+    
+    /* [핵심] translateX(-50%)와 rotate(-4deg)를 한 줄에 써야 둘 다 적용됩니다 */
+    transform: translateX(-50%);
+    
+    display: flex;
+    align-items: center;  /* 타원 중심과 양옆 글자 중심 맞춤 */
+    justify-content: center;
+    gap: 25px;            /* 타원과 글자 사이 간격 */
+    
+    width: max-content;   /* 콘텐츠 길이에 맞춰 너비 자동 조절 */
+    z-index: 2;
+    margin: 0;            /* 불필요한 마진 제거 */
+}
+
+/* 타원 배지 자체는 크기가 변하지 않게 고정 */
+.oval-badge {
+    flex-shrink: 0; 
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 20px;
+    border: 1.8px solid #000;
+    border-radius: 50% / 50%;
+    background-color: #FFF9F0;
+}
+
+/* 내부 텍스트 */
+.header-text {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: 35px;
+    color: #000;
+    margin: 0 !important;
+    text-align: center;
+    line-height: 1;             /* 세로 중앙 정렬 보정 */
+}
+
+
+/*2026-01-20 03:03 아이콘 추가*/
+.floating-btn {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 120px;   /* 버튼의 전체 크기 */
+    height: 120px;  /* 정사각형 비율 유지 */
+    z-index: 1000;
+    transition: transform 0.2s;
+    
+    /* 3. 부모 요소의 배경, 테두리, 패딩을 완전히 제거 */
+    background: transparent !important; 
+    border: none !important;
+    padding: 0 !important;
+    outline: none !important;      /* 포커스 시 생기는 선 제거 */
+    box-shadow: none !important;   /* 그림자 제거 */
+    padding: 0 !important;
+    margin: 0 !important;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;         /* 링크 밑줄 방지 */
+    overflow: visible;             /* 사진이 조금 커져도 안 잘리게 */
+    cursor: pointer; /* 마우스 올렸을 때 손가락 모양 */
+}
+
+.floating-btn:hover {
+    transform: scale(1.1); /* 마우스 올리면 커지는 효과는 유지 */
+}
+
+.floating-btn img {
+    width: 100%;    /* 부모인 .floating-btn에 꽉 차게 */
+    height: 100%;
+    object-fit: cover; /* 비율 유지하며 꽉 채움 */
+    
+    border-radius: 10px; /* 살짝 둥글게 하면 더 예뻐요 */
+}
+
+
+/* 내 프사 마커 컨테이너 */
+.my-profile-marker {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    z-index: 999;
+}
+
+/* 동그란 프사 이미지 */
+.my-profile-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+    background: white;
+    object-fit: cover;
+}
+
+/* 마커 아래 뾰족한 삼각형 */
+.my-profile-pin {
+    position: absolute;
+    bottom: -8px;
+    left: 19px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid #000;
+}
+
+/* auth-section 위치 고정 */
+.auth-section {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.user-nav-wrapper {
+    display: flex;
+    gap: 2px; /* 프사와 화살표 사이 간격 */
+    align-items: center;
+}
+
+/* 개별 버튼 스타일 */
+.nav-profile-btn, .nav-arrow-btn {
+    background: #FFF9F0;
+    border: 3px solid #000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.1s;
+}
+
+.nav-profile-btn {
+    width: 50px; height: 50px;
+    border-radius: 50%; /* 동그란 프사 버튼 */
+    padding: 0;
+    overflow: hidden;
+}
+
+.nav-arrow-btn {
+    width: 30px; height: 10px;
+    border: none;
+}
+
+/* 상단 바에 항상 떠 있는 작은 프로필 버튼 */
+.nav-profile-btn {
+    width: 45px !important;   /* 크기를 45px로 딱 고정 */
+    height: 45px !important;
+    border: 0px solid;
+    overflow: hidden;         /* 사진이 버튼 밖으로 안 나가게 */
+    padding: 0;
+    background: white;
+    cursor: pointer;
+    flex-shrink: 0;           /* 크기 압축 방지 */
+}
+
+/* 버튼 안의 실제 이미지 */
+.user-nav-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* 비율 유지하며 꽉 채우기 */
+    display: block;
+}
+
+/* [추가] 유저 카드(팝업) 내부의 큰 프로필 사진 */
+.user-card-img {
+    width: 70px !important;   /* 카드 안의 사진은 조금 더 커도 예뻐요 */
+    height: 70px !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.flat-v {
+    display: inline-block; /* transform을 적용하려면 필수입니다! */
+    font-weight: bold;    /* 너무 얇으면 두껍게 조절 */
+
+    font-size: 15px;
+    transform: scaleY(0.5); 
+    margin-top: -2px; 
+    transition: transform 0.2s ease; /* 애니메이션 효과용 */
+}
+
+
+.user-card {
+    display: none; /* 기본적으로 숨김 */
+    position: absolute;
+    top: 50px;    /* 버튼 아래에 위치하도록 조정 */
+    right: 0;
+    width: 250px;
+    background: #FFF9F0;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    z-index: 2100;
+}
+
+/* 스크립트에 의해 show 클래스가 추가되면 보이게 함 */
+.user-card.show {
+    display: block;
+}
+
+/* 화살표 애니메이션 (선택 사항) */
+.user-card.show + .user-nav-wrapper .flat-v {
+    transform: scaleY(-0.5); /* 열렸을 때 화살표 뒤집기 */
+}
+
+
+/*카드 내부 배치*/
+/* 1. 이미지와 텍스트를 가로로 배치 (이미지 + 이름/상태) */
+.user-main {
+    display: flex;          /* 가로로 나열 */
+    align-items: center;    /* 세로 중앙 정렬 */
+    gap: 15px;              /* 사진과 글자 사이 간격 */
+    margin-bottom: 20px;    /* 아래쪽 로그아웃 버튼과의 간격 */
+}
+
+/* 2. 이름과 '개인 계정' 텍스트를 세로로 배치 */
+.user-text {
+    display: flex;
+    flex-direction: column; /* 위아래로 나열 */
+    gap: 2px;               /* 이름과 상태 글자 사이 간격 */
+}
+
+.user-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #000;
+}
+
+.user-status {
+    font-size: 0.85em;
+    color: #888;
+}
+
+/* 3. 하단 로그아웃 버튼 영역 */
+.user-footer {
+    padding-top: 15px;
+    border-top: 1.5px solid #eee; /* 구분선 */
+    display: flex;
+    justify-content: center;      /* 버튼을 가운데로 */
+}
+
+/* 4. 로그아웃 버튼 크기 조정 */
+.logout-wrap {
+    width: 100%;                  /* 카드 너비에 맞춤 */
+}
+
+.logout-text {
+    text-align: center;
+    padding: 8px 0 !important;    /* 버튼 높이 조절 */
+    font-size: 0.9em;
+}

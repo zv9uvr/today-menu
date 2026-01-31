@@ -1,0 +1,85 @@
+{% extends "menu/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="title-container">
+        <div class="main-title-area">
+            <h1>Today's Menu</h1>
+        
+            <div class="header-container">
+                <span class="side-text left">MON TO SUN<br>ALWAYS OPEN</span>
+            
+                <div class="oval-badge">
+                    <div class="header-text">
+                        今日の<br>メニュー
+                    </div>
+                </div>
+
+                <span class="side-text right">SERVED FRESH DAILY<br>GOOD FOOD, GOOD MOOD</span>
+            </div>
+        </div>
+    </div>
+
+    <!--한식/일식/중식/양식/카페 버튼-->
+    <div class="button-group">
+        <button class="neobtn" onclick="searchPlaces('한식')"><span class="button_top">한식</span></button>
+        <button class="neobtn" onclick="searchPlaces('일식')"><span class="button_top">일식</span></button>
+        <button class="neobtn" onclick="searchPlaces('중식')"><span class="button_top">중식</span></button>
+        <button class="neobtn" onclick="searchPlaces('양식')"><span class="button_top">양식</span></button>
+        <button class="neobtn" onclick="searchPlaces('카페')"><span class="button_top">카페</span></button>
+    </div>
+    <!----------------------------->
+
+    <!--위치 설정 관련 그룹-->
+    <div class="input-group">
+        <!--위치 검색창-->
+        <div class="search-box">
+            <input type="text" id="location-input" placeholder="어디 근처에서 찾을까요?">
+            <button class="search-btn" onclick="setLocation()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <!--내 위치 버튼-->
+        <button class="neobtn" onclick="getCurrentLocation()" style="--button_color: #FFF9F0;">
+            <span class="button_top">내 위치</span>
+        </button>
+    </div>
+    <!----------------------------->
+
+    <!--지도 및 레스토랑 리스트-->
+    <div class="map-container">
+        <div class="map-wrapper">
+            <div id="category-title" class="category-label"> < CATEGORY > </div>
+            <div id="map"></div>
+        </div>
+
+        <div class="restaurant-list" id="restaurant-list">
+            <button class="refresh-button" onclick="displayRandomPlaces()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"></path>
+                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"></path>
+                </svg>
+                REFRESH
+            </button>
+
+        <div class="warning-message" id="warning-message" style="display: none;">
+            <p>더 이상 식당이 없어요!</p>
+            <button class="neobtn" onclick="resetRestaurants()" style="--button_color: #FFF59D; margin-top: 10px;">
+                <span class="button_top">RESET</span>
+            </button>
+        </div>
+    </div>
+    <!----------------------------->
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'menu/script.js' %}"></script>
+    <script>
+        // 장고에서 보낸 프로필 이미지 주소를 JS 변수에 저장
+        var userProfileImg = "{{ user_profile_img|default:'' }}";
+    </script>
+{% endblock %}

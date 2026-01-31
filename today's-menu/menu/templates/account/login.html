@@ -1,0 +1,27 @@
+{% extends "menu/base.html" %} {% load static %}
+{% load socialaccount %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'menu/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1 class="auth-title">Today's Menu</h1>
+        <p class="auth-subtitle">오늘 뭐 먹지? 고민 해결!<br>로그인하고 나만의 맛집을 찾아보세요.</p>
+
+        <div class="auth-btn-group">
+            <a href="{% provider_login_url 'kakao' %}" class="neobtn kakao-login-btn">
+                <span class="button_top">
+                    <span class="kakao-symbol">🟡</span> 카카오로 1초 만에 시작
+                </span>
+            </a>
+            
+            <a href="/" class="neobtn back-btn">
+                <span class="button_top" style="--button_color: #eee;">홈으로 돌아가기</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
